@@ -1,8 +1,9 @@
-package com.app.politcus.com.politicus.questions;
+package com.app.politcus.questions;
 
 /**
  * Created by Thomas on 11/10/2016.
  */
+
 
 import java.util.ArrayList;
 

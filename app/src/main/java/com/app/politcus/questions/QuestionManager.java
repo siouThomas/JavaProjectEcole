@@ -1,4 +1,4 @@
-package com.app.politcus.com.politicus.questions;
+package com.app.politcus.questions;
 
 import java.util.ArrayList;
 
