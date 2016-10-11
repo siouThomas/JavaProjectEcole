@@ -59,13 +59,14 @@ public class QuestionManager
                 if (instance == null)
                 {
                     instance = new QuestionManager();
+                    instance.init();
                 }
             }
         }
         return instance;
     }
 
-    public ArrayList<Question> getQuestions(int numberQuestion) throws Exception
+    public ArrayList<Question> get(int numberQuestion) throws Exception
     {
 
         if(this.questions.size() > numberQuestion)
