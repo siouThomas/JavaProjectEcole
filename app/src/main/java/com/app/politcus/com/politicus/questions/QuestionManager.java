@@ -65,7 +65,7 @@ public class QuestionManager
         return instance;
     }
 
-    public ArrayList<Question> getQuestion(int numberQuestion) throws Exception
+    public ArrayList<Question> getQuestions(int numberQuestion) throws Exception
     {
 
         if(this.questions.size() > numberQuestion)
