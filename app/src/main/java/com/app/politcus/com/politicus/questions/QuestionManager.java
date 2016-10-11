@@ -69,7 +69,7 @@ public class QuestionManager
     public ArrayList<Question> get(int numberQuestion) throws Exception
     {
 
-        if(this.questions.size() > numberQuestion)
+        if(this.questions.size() < numberQuestion)
             throw new Exception();
 
         //Todo refactor choix question ....
