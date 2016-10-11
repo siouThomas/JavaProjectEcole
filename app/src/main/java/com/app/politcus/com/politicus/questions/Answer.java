@@ -18,9 +18,10 @@ public enum Answer {
 
     Faux(1),
 
-    Vrais(2);
+    Vrais(2),
 
     //TODO add les autres type exemple partie politique
+    Droite(3);
 
     private int value;
 
