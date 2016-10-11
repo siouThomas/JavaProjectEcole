@@ -19,6 +19,9 @@ import java.util.ArrayList;
 
 public class Question
 {
+
+
+    private int id;
     private String title;
     private QuestionType type;
     //TODO reflechir sur une possibilité de multi réponse a voir pour le moment simple constructor one answer
@@ -44,6 +47,14 @@ public class Question
         this.type = type;
 
         this.answers.add(answer);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
@@ -85,5 +96,7 @@ public class Question
 
         this.answers.remove(answer);
     }
+
+
 
 }
