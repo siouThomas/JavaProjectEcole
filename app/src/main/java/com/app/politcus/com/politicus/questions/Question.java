@@ -22,6 +22,7 @@ public class Question
     private QuestionType type;
     //TODO reflechir sur une possibilité de multi réponse a voir pour le moment simple constructor one answer
     final private ArrayList<Answer> answers = new ArrayList<Answer>();
+    final private ArrayList<Answer> choices = new ArrayList<Answer>();
 
     //TODO faire une class pour les exeptions jetés
 
