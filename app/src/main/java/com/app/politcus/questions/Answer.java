@@ -21,7 +21,13 @@ public enum Answer {
     True(2),
 
     //TODO add les autres type exemple partie politique
-    Droite(3);
+    Droite(3),
+
+    Gauche(4),
+
+    Libertaire(5),
+
+    Communautariste(6);
 
     private int value;
 

@@ -1,4 +1,8 @@
 package com.app.politcus.database;
+import com.app.politcus.questions.QuestionType;
+import com.app.politcus.questions.Question;
+import com.app.politcus.questions.Answer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,7 @@ public class QuizzDAO {
     dbHelper.close();
   }
 
+  /*
   public QuestionQuizz createQuestionQuizz(String title, int answer) {
     ContentValues values = new ContentValues();
     values.put(MySQLiteHelper.COLUMN_TITLE, title);
@@ -40,7 +45,7 @@ public class QuizzDAO {
       allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
       null, null, null);
     cursor.moveToFirst();
-    QuestionQuizz newQuestionQuizz = cursorToQuestionQuizz(cursor);
+    QuestionQuizz newQuestionQuizz = cursorToQuestion(cursor);
     cursor.close();
     return newQuestionQuizz;
   }
@@ -51,30 +56,55 @@ public class QuizzDAO {
     database.delete(MySQLiteHelper.TABLE_QUIZZ, MySQLiteHelper.COLUMN_ID
       + " = " + id, null);
   }
+*/
+  public ArrayList<Question> getAllQuestionQuizz() {
 
-  public List<QuestionQuizz> getAllQuestionQuizz() {
-    List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
+    ArrayList<Question> questions = new ArrayList<Question>();
+
+    //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
 
     Cursor cursor = database.query(MySQLiteHelper.TABLE_QUIZZ,
       allColumns, null, null, null, null, null);
 
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
-      QuestionQuizz questionQuizz = cursorToQuestionQuizz(cursor);
-      questionsQuizz.add(questionQuizz);
+      Question question = cursorToQuestion(cursor);
+      questions.add(question);
       cursor.moveToNext();
     }
     // assurez-vous de la fermeture du curseur
     cursor.close();
-    return questionsQuizz;
+    return questions;
   }
 
-  private QuestionQuizz cursorToQuestionQuizz(Cursor cursor) {
-    QuestionQuizz questionQuizz = new QuestionQuizz();
-    questionQuizz.setId(cursor.getLong(0));
-    questionQuizz.setTitle(cursor.getString(1));
-    questionQuizz.setAnswer(cursor.getInt(2));
+  private Question cursorToQuestion(Cursor cursor) {
+    Question question = new Question();
 
-    return questionQuizz;
+    question.setId((int)cursor.getLong(0));
+    question.setTitle(cursor.getString(1));
+
+    question.setType(QuestionType.TrueFalse);
+
+    Answer answer = Answer.None;
+
+    if (cursor.getInt(2) == 0 )
+      answer = Answer.False;
+    else
+      answer = Answer.True;
+
+    try {
+      question.addAnswers(answer);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    try {
+      question.addChoices(Answer.True);
+      question.addChoices(Answer.False);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return question;
   }
 }

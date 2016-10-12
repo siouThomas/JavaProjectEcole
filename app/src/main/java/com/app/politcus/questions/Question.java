@@ -97,6 +97,25 @@ public class Question
         this.answers.remove(answer);
     }
 
+  public ArrayList<Answer> getChoices() {
+    return choices;
+  }
 
+
+  public void addChoices(Answer answer) throws Exception {
+
+    if(this.choices.contains(answer))
+      throw new Exception();
+
+    this.choices.add(answer);
+
+  }
+
+  public void deleteChoices(Answer answer) throws Exception {
+    if(!this.choices.contains(answer))
+      throw new Exception();
+
+    this.choices.remove(answer);
+  }
 
 }
