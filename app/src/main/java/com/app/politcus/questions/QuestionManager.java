@@ -54,7 +54,7 @@ public class QuestionManager
 
             try
             {
-                tmp.addAnswers(Answer.Vrai);
+                tmp.addAnswers(Answer.True);
 
             } catch (Exception e)
             {

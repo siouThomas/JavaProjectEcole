@@ -16,9 +16,9 @@ package com.app.politcus.questions;
 public enum Answer {
     None(0),
 
-    Faux(1),
+    False(1),
 
-    Vrai(2),
+    True(2),
 
     //TODO add les autres type exemple partie politique
     Droite(3);
