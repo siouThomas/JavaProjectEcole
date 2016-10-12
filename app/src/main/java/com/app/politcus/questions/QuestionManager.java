@@ -67,6 +67,8 @@ public class QuestionManager
 
             this.questions.add(tmp);
         }
+
+        questionsStocks.clear();
     }
 
     /**
