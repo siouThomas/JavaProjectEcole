@@ -18,7 +18,7 @@ public enum Answer {
 
     Faux(1),
 
-    Vrais(2),
+    Vrai(2),
 
     //TODO add les autres type exemple partie politique
     Droite(3);
