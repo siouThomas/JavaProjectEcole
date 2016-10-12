@@ -1,6 +1,5 @@
 package com.app.politcus.questions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -55,7 +54,7 @@ public class QuestionManager
 
             try
             {
-                tmp.addAnswers(Answer.Vrais);
+                tmp.addAnswers(Answer.True);
 
             } catch (Exception e)
             {
@@ -67,6 +66,8 @@ public class QuestionManager
 
             this.questions.add(tmp);
         }
+
+        questionsStocks.clear();
     }
 
     /**
