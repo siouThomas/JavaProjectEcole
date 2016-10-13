@@ -1,12 +1,8 @@
 package com.app.politcus.database;
-import com.app.politcus.questions.QuestionType;
-import com.app.politcus.questions.Question;
-import com.app.politcus.questions.Answer;
+import com.app.politcus.questions.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -19,8 +15,10 @@ public class QuizzDAO {
   // Champs de la base de données
   private SQLiteDatabase database;
   private MySQLiteHelper dbHelper;
-  private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
+  private String[] allColumnsQuizz = { MySQLiteHelper.COLUMN_ID,
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ANSWER };
+  private String[] allColumnsTest = { MySQLiteHelper.COLUMN_ID,
+    MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ORIENTATION };
 
   public QuizzDAO(Context context) {
     dbHelper = new MySQLiteHelper(context);
@@ -42,7 +40,7 @@ public class QuizzDAO {
     long insertId = database.insert(MySQLiteHelper.TABLE_QUIZZ, null,
       values);
     Cursor cursor = database.query(MySQLiteHelper.TABLE_QUIZZ,
-      allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+      allColumnsQuizz, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
       null, null, null);
     cursor.moveToFirst();
     QuestionQuizz newQuestionQuizz = cursorToQuestion(cursor);
@@ -57,27 +55,47 @@ public class QuizzDAO {
       + " = " + id, null);
   }
 */
-  public ArrayList<Question> getAllQuestionQuizz() {
+  public ArrayList<QuestionQuizz> getAllQuestionQuizz() {
 
-    ArrayList<Question> questions = new ArrayList<Question>();
+    ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
 
     //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
 
     Cursor cursor = database.query(MySQLiteHelper.TABLE_QUIZZ,
-      allColumns, null, null, null, null, null);
+      allColumnsQuizz, null, null, null, null, null);
 
     cursor.moveToFirst();
     while (!cursor.isAfterLast()) {
-      Question question = cursorToQuestion(cursor);
-      questions.add(question);
+      QuestionQuizz questionQuizz = cursorToQuestionQuizz(cursor);
+      questionsQuizz.add(questionQuizz);
       cursor.moveToNext();
     }
     // assurez-vous de la fermeture du curseur
     cursor.close();
-    return questions;
+    return questionsQuizz;
   }
 
-  private Question cursorToQuestion(Cursor cursor) {
+  public ArrayList<QuestionTest> getAllQuestionTest() {
+
+    ArrayList<QuestionTest> questionsTest = new ArrayList<QuestionTest>();
+
+    //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
+
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_TEST,
+      allColumnsTest, null, null, null, null, null);
+
+    cursor.moveToFirst();
+    while (!cursor.isAfterLast()) {
+      QuestionTest questionTest = cursorToQuestionTest(cursor);
+      questionsTest.add(questionTest);
+      cursor.moveToNext();
+    }
+    // assurez-vous de la fermeture du curseur
+    cursor.close();
+    return questionsTest;
+  }
+
+  private Question cursorToQuestionQuizz(Cursor cursor) {
     Question question = new Question();
 
     question.setId((int)cursor.getLong(0));
@@ -91,6 +109,41 @@ public class QuizzDAO {
       answer = Answer.False;
     else
       answer = Answer.True;
+
+    try {
+      question.addAnswers(answer);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    try {
+      question.addChoices(Answer.True);
+      question.addChoices(Answer.False);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return question;
+  }
+
+  private Question cursorToQuestionTest(Cursor cursor) {
+    Question question = new Question();
+
+    question.setId((int)cursor.getLong(0));
+    question.setTitle(cursor.getString(1));
+
+    question.setType(QuestionType.MultiAnswer);
+
+    Answer answer = Answer.None;
+
+    if (cursor.getString(2).equals("G") )
+      answer = Answer.Gauche;
+    if (cursor.getString(2).equals("D") )
+      answer = Answer.Droite;
+    if (cursor.getString(2).equals("C") )
+      answer = Answer.Communautariste;
+    if (cursor.getString(2).equals("L") )
+      answer = Answer.Libertaire;
 
     try {
       question.addAnswers(answer);

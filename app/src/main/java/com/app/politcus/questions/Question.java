@@ -17,37 +17,29 @@ import java.util.ArrayList;
  * Answer answer qui est le type de réponse à cette question
  */
 
-public class Question
+public abstract class Question
 {
 
 
     private int id;
     private String title;
-    private QuestionType type;
-    //TODO reflechir sur une possibilité de multi réponse a voir pour le moment simple constructor one answer
-    final private ArrayList<Answer> answers = new ArrayList<Answer>();
-    final private ArrayList<Answer> choices = new ArrayList<Answer>();
+
+    //final private ArrayList<Answer> answers = new ArrayList<Answer>();
+
 
     //TODO faire une class pour les exeptions jetés
 
     public Question()
     {
-        this("", QuestionType.None, Answer.None);
+        this("");
     }
 
 
     public Question(String title)
     {
-        this(title, QuestionType.None, Answer.None);
-    }
-
-    public Question(String title, QuestionType type, Answer answer)
-    {
         this.title = title;
-        this.type = type;
-
-        this.answers.add(answer);
     }
+
 
     public int getId() {
         return id;
@@ -67,55 +59,8 @@ public class Question
         this.title = title;
     }
 
-    public QuestionType getType() {
-        return type;
-    }
-
-    public void setType(QuestionType type) {
-        this.type = type;
-    }
 
 
-    public ArrayList<Answer> getAnswers() {
-        return answers;
-    }
 
-
-    public void addAnswers(Answer answer) throws Exception {
-
-        if(this.answers.contains(answer))
-            throw new Exception();
-
-        this.answers.add(answer);
-
-    }
-
-    public void deleteAnswers(Answer answer) throws Exception {
-        if(!this.answers.contains(answer))
-            throw new Exception();
-
-        this.answers.remove(answer);
-    }
-
-  public ArrayList<Answer> getChoices() {
-    return choices;
-  }
-
-
-  public void addChoices(Answer answer) throws Exception {
-
-    if(this.choices.contains(answer))
-      throw new Exception();
-
-    this.choices.add(answer);
-
-  }
-
-  public void deleteChoices(Answer answer) throws Exception {
-    if(!this.choices.contains(answer))
-      throw new Exception();
-
-    this.choices.remove(answer);
-  }
 
 }

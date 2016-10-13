@@ -13,9 +13,10 @@ public class QuestionManager
 
     private static volatile QuestionManager instance;
 
-    final private ArrayList<Question> questions = new ArrayList<Question>();
+    final private ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
+    final private ArrayList<QuestionTest> questionsTest = new ArrayList<QuestionTest>();
 
-    final private ArrayList<Question> questionsStocks = new ArrayList<Question>();
+    //final private ArrayList<Question> questionsStocks = new ArrayList<Question>();
 
     private QuestionManager()
     {

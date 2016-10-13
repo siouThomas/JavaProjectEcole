@@ -14,28 +14,22 @@ package com.app.politcus.questions;
  *
  */
 public enum Answer {
-    None(0),
+  None(0),
 
-    False(1),
+  False(1),
 
-    True(2),
+  True(2);
 
-    //TODO add les autres type exemple partie politique
-    Droite(3),
+  private int value;
 
-    Gauche(4),
+  Answer(int value) {
+    this.value = value;
+  }
 
-    Libertaire(5),
+  public int get() {
+    return value;
+  }
 
-    Communautariste(6);
-
-    private int value;
-
-    Answer(int value) {
-        this.value = value;
-    }
-
-    public int get() {
-        return value;
-    }
 }
+
+
