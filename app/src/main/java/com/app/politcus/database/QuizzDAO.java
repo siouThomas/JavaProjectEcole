@@ -1,4 +1,5 @@
 package com.app.politcus.database;
+import com.app.politcus.App;
 import com.app.politcus.questions.*;
 
 import java.util.ArrayList;
@@ -7,11 +8,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-/**
- * Created by Antoine on 11/10/2016.
- */
+
 
 public class QuizzDAO {
+
   // Champs de la base de données
   private SQLiteDatabase database;
   private MySQLiteHelper dbHelper;
@@ -20,8 +20,21 @@ public class QuizzDAO {
   private String[] allColumnsTest = { MySQLiteHelper.COLUMN_ID,
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ORIENTATION };
 
-  public QuizzDAO(Context context) {
-    dbHelper = new MySQLiteHelper(context);
+  private static QuizzDAO instance = null;
+
+  public static final QuizzDAO getInstance(){
+    if (instance == null) {
+      synchronized (QuizzDAO.class) {
+        if (instance == null) {
+          instance = new QuizzDAO();
+        }
+      }
+    }
+    return instance;
+  }
+
+  private QuizzDAO() {
+    dbHelper = new MySQLiteHelper(App.get().getApplicationContext());
   }
 
   public void open() throws SQLException {
