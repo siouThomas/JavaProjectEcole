@@ -5,10 +5,8 @@ package com.app.politcus.questions;
  */
 
 public enum Orientation {
-
   None(0),
-  
-  //TODO add les autres type exemple partie politique
+
   Droite(1),
 
   Gauche(2),
@@ -16,6 +14,5 @@ public enum Orientation {
   Libertaire(3),
 
   Communautariste(4);
-
 
 }

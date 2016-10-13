@@ -6,5 +6,16 @@ package com.app.politcus.questions;
 
 public class QuestionTest extends Question {
 
+  private Orientation orientation;
 
+  public QuestionTest() {
+  }
+
+  public Orientation getOrientation() {
+    return orientation;
+  }
+
+  public void setOrientation(Orientation orientation) {
+    this.orientation = orientation;
+  }
 }

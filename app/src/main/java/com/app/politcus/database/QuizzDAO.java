@@ -95,69 +95,35 @@ public class QuizzDAO {
     return questionsTest;
   }
 
-  private Question cursorToQuestionQuizz(Cursor cursor) {
-    Question question = new Question();
+  private QuestionQuizz cursorToQuestionQuizz(Cursor cursor) {
+    QuestionQuizz questionQuizz = new QuestionQuizz();
 
-    question.setId((int)cursor.getLong(0));
-    question.setTitle(cursor.getString(1));
-
-    question.setType(QuestionType.TrueFalse);
-
-    Answer answer = Answer.None;
+    questionQuizz.setId((int)cursor.getLong(0));
+    questionQuizz.setTitle(cursor.getString(1));
 
     if (cursor.getInt(2) == 0 )
-      answer = Answer.False;
+      questionQuizz.setAnswer(false);
     else
-      answer = Answer.True;
+      questionQuizz.setAnswer(true);
 
-    try {
-      question.addAnswers(answer);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    try {
-      question.addChoices(Answer.True);
-      question.addChoices(Answer.False);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return question;
+    return questionQuizz;
   }
 
-  private Question cursorToQuestionTest(Cursor cursor) {
-    Question question = new Question();
+  private QuestionTest cursorToQuestionTest(Cursor cursor) {
+    QuestionTest questionTest = new QuestionTest();
 
-    question.setId((int)cursor.getLong(0));
-    question.setTitle(cursor.getString(1));
-
-    question.setType(QuestionType.MultiAnswer);
-
-    Answer answer = Answer.None;
+    questionTest.setId((int)cursor.getLong(0));
+    questionTest.setTitle(cursor.getString(1));
 
     if (cursor.getString(2).equals("G") )
-      answer = Answer.Gauche;
+      questionTest.setOrientation(Orientation.Gauche);
     if (cursor.getString(2).equals("D") )
-      answer = Answer.Droite;
+      questionTest.setOrientation(Orientation.Droite);
     if (cursor.getString(2).equals("C") )
-      answer = Answer.Communautariste;
+      questionTest.setOrientation(Orientation.Communautariste);
     if (cursor.getString(2).equals("L") )
-      answer = Answer.Libertaire;
+      questionTest.setOrientation(Orientation.Libertaire);
 
-    try {
-      question.addAnswers(answer);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    try {
-      question.addChoices(Answer.True);
-      question.addChoices(Answer.False);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    return question;
+    return questionTest;
   }
 }
