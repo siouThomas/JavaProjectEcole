@@ -9,11 +9,10 @@ public class QuestionQuizz extends Question {
 
   private boolean answer;
 
-  public QuestionQuizz(boolean answer) {
-    this.answer = answer;
+  public QuestionQuizz() {
   }
 
-  public boolean isAnswer() {
+  public boolean getAnswer() {
     return answer;
   }
 
