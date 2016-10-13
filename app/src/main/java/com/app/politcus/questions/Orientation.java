@@ -5,14 +5,9 @@ package com.app.politcus.questions;
  */
 
 public enum Orientation {
-  None(0),
-
-  Droite(1),
-
-  Gauche(2),
-
-  Libertaire(3),
-
-  Communautariste(4);
-
+  None,
+  Droite,
+  Gauche,
+  Libertaire,
+  Communautariste;
 }
