@@ -9,11 +9,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.app.politcus.R;
+import com.app.politcus.questions.QuestionQuizz;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
+
 public class TestDatabaseActivity extends ListActivity  {
 
   private QuizzDAO quizzDAO;
@@ -23,7 +21,7 @@ public class TestDatabaseActivity extends ListActivity  {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    quizzDAO = new QuizzDAO(this);
+    quizzDAO = QuizzDAO.getInstance();
     quizzDAO.open();
 
     List<QuestionQuizz> values = quizzDAO.getAllQuestionQuizz();

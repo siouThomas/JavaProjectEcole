@@ -39,12 +39,13 @@ public class QuestionManager {
      * en attendant ANTOINE LIEBERTTTla liason bdd en entre en dur les question
      */
     void init() {
-        QuestionQuizz tmp = new QuestionQuizz(true);
+        QuestionQuizz tmp = new QuestionQuizz();
         QuestionTest tmp2 = new QuestionTest();
 
         for (int i = 0; i < 5; i++) {
             tmp.setTitle("Question example" + i);
             tmp.setId(i);
+            tmp.setAnswer(true);
             this.questionsQuizz.add(tmp);
 
             tmp2.setTitle("Question test example " + i);
