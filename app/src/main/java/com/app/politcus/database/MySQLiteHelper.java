@@ -4,9 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by Antoine on 11/10/2016.
- */
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String TABLE_QUIZZ = "q_quizz";
