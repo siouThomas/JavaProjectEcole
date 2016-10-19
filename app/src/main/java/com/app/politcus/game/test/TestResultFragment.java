@@ -8,14 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.app.politcus.R;
-import com.app.politcus.questions.Orientation;
-import com.app.politcus.questions.QuestionManager;
-import com.app.politcus.questions.QuestionTest;
 
-public class TestResultFragment extends Fragment{
+
+public class TestResultFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private float horizontal;
@@ -71,19 +68,9 @@ public class TestResultFragment extends Fragment{
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.btn_next){
-            processScore();
-            displayNextQuestion();
+        if(view.getId() == R.id.btn_back){
+            // TODO : Find a way to go to main menu
         }
-    }
-
-    private void displayNextQuestion() {
-        currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
-        TextView progress = (TextView) getView().findViewById(R.id.text_progress);
-        TextView text = (TextView) getView().findViewById(R.id.text_question);
-
-        progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
-        text.setText(currentQuestion.getTitle());
     }
 
     public interface OnFragmentInteractionListener {
@@ -91,26 +78,4 @@ public class TestResultFragment extends Fragment{
         void onFragmentInteraction(Uri uri);
     }
 
-    public void processScore() {
-        Orientation orientation = currentQuestion.getOrientation();
-        float modifier = 0;
-        switch (orientation) {
-            case Droite:
-                hScorePlusMax++;
-                hScore += modifier;
-                break;
-            case Gauche:
-                hScoreMinusMax++;
-                hScore -= modifier;
-                break;
-            case Communautariste:
-                vScorePlusMax++;
-                vScore += modifier;
-                break;
-            case Libertaire:
-                vScoreMinusMax++;
-                vScore -= modifier;
-                break;
-        }
-    }
 }
