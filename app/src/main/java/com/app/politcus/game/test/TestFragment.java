@@ -34,7 +34,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     private int vScorePlusMax = 0;
     private int vScoreMinusMax = 0;
     private QuestionTest currentQuestion;
-    private int currentProgress = 0;
+    private int currentProgress = 1;
 
     public TestFragment() {
         // Required empty public constructor
@@ -100,6 +100,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     }
 
     private void displayNextQuestion() {
+        currentProgress++;
         currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
         TextView progress = (TextView) getView().findViewById(R.id.text_progress);
         TextView text = (TextView) getView().findViewById(R.id.text_question);
