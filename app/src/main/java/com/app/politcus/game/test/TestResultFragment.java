@@ -1,4 +1,4 @@
-package com.app.politcus.game;
+package com.app.politcus.game.test;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,32 +15,18 @@ import com.app.politcus.questions.Orientation;
 import com.app.politcus.questions.QuestionManager;
 import com.app.politcus.questions.QuestionTest;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TestFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TestFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class TestFragment extends Fragment implements View.OnClickListener {
+public class TestResultFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
-    private int hScore = 0;
-    private int vScore = 0;
-    private int hScorePlusMax = 0;
-    private int hScoreMinusMax = 0;
-    private int vScorePlusMax = 0;
-    private int vScoreMinusMax = 0;
-    private QuestionTest currentQuestion;
-    private int currentProgress = 0;
+    private float horizontal;
+    private float vertical;
 
-    public TestFragment() {
+    public TestResultFragment() {
         // Required empty public constructor
     }
 
-    public static TestFragment newInstance() {
-        TestFragment fragment = new TestFragment();
+    public static TestResultFragment newInstance() {
+        TestResultFragment fragment = new TestResultFragment();
         return fragment;
     }
 
@@ -53,9 +39,9 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_test, container, false);
-        Button nextButton = (Button) view.findViewById(R.id.btn_next);
-        nextButton.setOnClickListener(this);
+        View view = inflater.inflate(R.layout.fragment_test_result, container, false);
+        Button backButton = (Button) view.findViewById(R.id.btn_back);
+        backButton.setOnClickListener(this);
         return view;
     }
 

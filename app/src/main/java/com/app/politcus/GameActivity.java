@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.app.politcus.game.QuizzFragment;
-import com.app.politcus.game.TestFragment;
+import com.app.politcus.game.test.TestFragment;
 
 public class GameActivity extends AppCompatActivity
         implements TestFragment.OnFragmentInteractionListener, QuizzFragment.OnFragmentInteractionListener{
@@ -19,11 +19,11 @@ public class GameActivity extends AppCompatActivity
         Fragment fragment;
         String fragmentToLoad = getIntent().getStringExtra("FragmentToLoad");
         if(fragmentToLoad.equals("Test")){
-            fragment = TestFragment.newInstance("1", "2");
+            fragment = TestFragment.newInstance();
         } else if(fragmentToLoad.equals("Quizz")){
             fragment = QuizzFragment.newInstance();
         } else {    // MiniGame
-            fragment = TestFragment.newInstance("1", "2");
+            fragment = TestFragment.newInstance();
         }
 
         getFragmentManager().beginTransaction().add(R.id.activity_quizz, fragment).commit();
