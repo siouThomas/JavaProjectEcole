@@ -133,6 +133,7 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
     }
 
     public void RestartGame(){
+        score = 0;
         Button trueButton = (Button) getView().findViewById(R.id.btn_true);
         Button falseButton = (Button) getView().findViewById(R.id.btn_false);
 
