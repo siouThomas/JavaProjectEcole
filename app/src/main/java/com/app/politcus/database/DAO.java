@@ -4,13 +4,14 @@ import com.app.politcus.questions.*;
 
 import java.util.ArrayList;
 
-import android.content.Context;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 
-public class QuizzDAO {
+public class DAO {
 
   // Champs de la base de données
   private SQLiteDatabase database;
@@ -20,21 +21,26 @@ public class QuizzDAO {
   private String[] allColumnsTest = { MySQLiteHelper.COLUMN_ID,
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ORIENTATION };
 
-  private static QuizzDAO instance = null;
+  private static DAO instance = null;
 
-  public static final QuizzDAO getInstance(){
+  public static final DAO getInstance(){
     if (instance == null) {
-      synchronized (QuizzDAO.class) {
+      synchronized (DAO.class) {
         if (instance == null) {
-          instance = new QuizzDAO();
+          instance = new DAO();
         }
       }
     }
     return instance;
   }
 
-  private QuizzDAO() {
-    dbHelper = new MySQLiteHelper(App.get().getApplicationContext());
+  private DAO() {
+    dbHelper = new MySQLiteHelper(App.getContext());
+    if(dbHelper == null){
+      Log.i("Error", "il s'est passé une merde");
+    } else {
+      Log.i("Error", "db helper initialisé");
+    }
   }
 
   public void open() throws SQLException {
@@ -42,7 +48,7 @@ public class QuizzDAO {
   }
 
   public void close() {
-    dbHelper.close();
+    database.close();
   }
 
   /*
@@ -72,9 +78,8 @@ public class QuizzDAO {
 
     ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
 
-    //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
-
-    Cursor cursor = database.query(MySQLiteHelper.TABLE_QUIZZ,
+    this.open();
+    Cursor cursor = database.query(dbHelper.TABLE_QUIZZ,
       allColumnsQuizz, null, null, null, null, null);
 
     cursor.moveToFirst();
@@ -85,6 +90,7 @@ public class QuizzDAO {
     }
     // assurez-vous de la fermeture du curseur
     cursor.close();
+    //this.close();
     return questionsQuizz;
   }
 
@@ -93,8 +99,8 @@ public class QuizzDAO {
     ArrayList<QuestionTest> questionsTest = new ArrayList<QuestionTest>();
 
     //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
-
-    Cursor cursor = database.query(MySQLiteHelper.TABLE_TEST,
+    this.open();
+    Cursor cursor = database.query(dbHelper.TABLE_TEST,
       allColumnsTest, null, null, null, null, null);
 
     cursor.moveToFirst();
@@ -105,6 +111,7 @@ public class QuizzDAO {
     }
     // assurez-vous de la fermeture du curseur
     cursor.close();
+    //this.close();
     return questionsTest;
   }
 
@@ -139,4 +146,56 @@ public class QuizzDAO {
 
     return questionTest;
   }
+
+  public void launchAsync(){
+    AsyncUpdateBDD asyncUpdateBDD = new AsyncUpdateBDD();
+    asyncUpdateBDD.execute();
+  }
+
+  public void updateDb(ArrayList<QuestionTest> questionsTestOnline, ArrayList<QuestionQuizz> questionsQuizzOnline){
+
+    this.open();
+    int nbQuestionsTestOnline = questionsTestOnline.size();
+    int nbQuestionsQuizzOnline = questionsQuizzOnline.size();
+
+    ArrayList<QuestionTest> questionsTest = getAllQuestionTest();
+    int nbQuestionsTest = questionsTest.size();
+
+    ArrayList<QuestionQuizz> questionsQuizz = getAllQuestionQuizz();
+    int nbQuestionsQuizz = questionsQuizz.size();
+
+    if (nbQuestionsTestOnline > nbQuestionsTest){
+      for (int i =nbQuestionsTest + 1 ; i<=nbQuestionsTestOnline; i++){
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_TITLE, questionsTestOnline.get(i-1).getTitle());
+        if (questionsTestOnline.get(i-1).getOrientation()==Orientation.Gauche )
+          values.put(MySQLiteHelper.COLUMN_ORIENTATION, "G");
+        if (questionsTestOnline.get(i-1).getOrientation()==Orientation.Droite )
+          values.put(MySQLiteHelper.COLUMN_ORIENTATION, "D");
+        if (questionsTestOnline.get(i-1).getOrientation()==Orientation.Communautariste )
+          values.put(MySQLiteHelper.COLUMN_ORIENTATION, "C");
+        if (questionsTestOnline.get(i-1).getOrientation()==Orientation.Libertaire )
+          values.put(MySQLiteHelper.COLUMN_ORIENTATION, "L");
+        long insertId = database.insert(MySQLiteHelper.TABLE_TEST, null,
+          values);
+      }
+    }
+
+    if (nbQuestionsQuizzOnline > nbQuestionsQuizz){
+      for (int i =nbQuestionsQuizz + 1 ; i<=nbQuestionsQuizzOnline; i++){
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_TITLE, questionsQuizzOnline.get(i-1).getTitle());
+        if (questionsQuizzOnline.get(i-1).getAnswer() )
+          values.put(MySQLiteHelper.COLUMN_ANSWER, 1);
+        else
+          values.put(MySQLiteHelper.COLUMN_ANSWER, 0);
+
+        long insertId = database.insert(MySQLiteHelper.TABLE_QUIZZ, null,
+          values);
+      }
+    }
+
+    //this.close();
+  }
+
 }
