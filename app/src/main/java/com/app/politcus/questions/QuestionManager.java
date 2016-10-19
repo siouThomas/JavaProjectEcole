@@ -1,5 +1,7 @@
 package com.app.politcus.questions;
 
+import com.app.politcus.database.DAO;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,8 +9,8 @@ public class QuestionManager {
 
     private static volatile QuestionManager instance;
 
-    final private ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
-    final private ArrayList<QuestionTest> questionsTest = new ArrayList<QuestionTest>();
+    private ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
+    private ArrayList<QuestionTest> questionsTest = new ArrayList<QuestionTest>();
 
     // List the questions already requested. Use this to avoid sending the same question too many
     // times to the user.
@@ -17,6 +19,10 @@ public class QuestionManager {
 
 
     private QuestionManager() {
+        questionsTestServed.clear();
+        questionsQuizzServed.clear();
+        questionsQuizz = DAO.getInstance().getAllQuestionQuizz();
+        questionsTest = DAO.getInstance().getAllQuestionTest();
     }
 
     /**
@@ -33,27 +39,6 @@ public class QuestionManager {
             }
         }
         return instance;
-    }
-
-    /**
-     * en attendant ANTOINE LIEBERTTTla liason bdd en entre en dur les question
-     */
-    void init() {
-        QuestionQuizz tmp = new QuestionQuizz();
-        QuestionTest tmp2 = new QuestionTest();
-
-        for (int i = 0; i < 5; i++) {
-            tmp.setTitle("Question example" + i);
-            tmp.setId(i);
-            tmp.setAnswer(true);
-            this.questionsQuizz.add(tmp);
-
-            tmp2.setTitle("Question test example " + i);
-            tmp2.setId(i);
-            questionsTest.add(tmp2);
-        }
-        questionsTestServed.clear();
-        questionsQuizzServed.clear();
     }
 
     public QuestionTest getRandomQuestionTest(){

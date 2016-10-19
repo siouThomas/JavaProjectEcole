@@ -7,8 +7,13 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.app.politcus.R;
+import com.app.politcus.questions.Orientation;
+import com.app.politcus.questions.QuestionManager;
+import com.app.politcus.questions.QuestionTest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,54 +23,40 @@ import com.app.politcus.R;
  * Use the {@link TestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class TestFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+    private int hScore = 0;
+    private int vScore = 0;
+    private int hScorePlusMax = 0;
+    private int hScoreMinusMax = 0;
+    private int vScorePlusMax = 0;
+    private int vScoreMinusMax = 0;
+    private QuestionTest currentQuestion;
+    private int currentProgress = 0;
 
     public TestFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TestFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TestFragment newInstance(String param1, String param2) {
+    public static TestFragment newInstance() {
         TestFragment fragment = new TestFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test, container, false);
+        View view = inflater.inflate(R.layout.fragment_test, container, false);
+        Button nextButton = (Button) view.findViewById(R.id.btn_next);
+        nextButton.setOnClickListener(this);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,18 +83,48 @@ public class TestFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.btn_next){
+            processScore();
+            displayNextQuestion();
+        }
+    }
+
+    private void displayNextQuestion() {
+        currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
+        TextView progress = (TextView) getView().findViewById(R.id.text_progress);
+        TextView text = (TextView) getView().findViewById(R.id.text_question);
+
+        progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
+        text.setText(currentQuestion.getTitle());
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void processScore() {
+        Orientation orientation = currentQuestion.getOrientation();
+        float modifier = 0;
+        switch (orientation) {
+            case Droite:
+                hScorePlusMax++;
+                hScore += modifier;
+                break;
+            case Gauche:
+                hScoreMinusMax++;
+                hScore -= modifier;
+                break;
+            case Communautariste:
+                vScorePlusMax++;
+                vScore += modifier;
+                break;
+            case Libertaire:
+                vScoreMinusMax++;
+                vScore -= modifier;
+                break;
+        }
     }
 }

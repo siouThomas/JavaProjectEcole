@@ -1,4 +1,4 @@
-package com.app.politcus.game.quizz;
+package com.app.politcus.game;
 
 import android.content.Context;
 import android.net.Uri;
