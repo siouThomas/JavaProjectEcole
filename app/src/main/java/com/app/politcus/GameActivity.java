@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.app.politcus.game.quizz.QuizzFragment;
+import com.app.politcus.game.QuizzFragment;
 import com.app.politcus.game.TestFragment;
 
 public class GameActivity extends AppCompatActivity
