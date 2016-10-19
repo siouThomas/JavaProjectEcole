@@ -15,12 +15,12 @@ public class GameActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+      //System.out.println("testou1");
         Fragment fragment;
         String fragmentToLoad = getIntent().getStringExtra("FragmentToLoad");
-        if(fragmentToLoad == "Test"){
+        if(fragmentToLoad.equals("Test")){
             fragment = TestFragment.newInstance("1", "2");
-        } else if(fragmentToLoad == "Quizz"){
+        } else if(fragmentToLoad.equals("Quizz")){
             fragment = QuizzFragment.newInstance();
         } else {    // MiniGame
             fragment = TestFragment.newInstance("1", "2");

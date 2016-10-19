@@ -16,8 +16,7 @@ public class QuestionManager {
     final private ArrayList<Integer> questionsQuizzServed = new ArrayList<Integer>();
 
 
-    private QuestionManager() {
-    }
+
 
     /**
      * permet de récuperer l'instance du singleton
