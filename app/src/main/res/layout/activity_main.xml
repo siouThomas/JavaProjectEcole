@@ -8,11 +8,11 @@
         android:text="Mini-jeu"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:id="@+id/button3"
+        android:id="@+id/btn_mini_game"
         android:layout_marginBottom="28dp"
         android:textColor="@android:color/holo_red_dark"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button2"
+        android:layout_alignStart="@+id/btn_quizz"
         android:textSize="17sp"
         android:background="@drawable/border_button" />
 
@@ -21,18 +21,18 @@
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
         android:id="@+id/imageView2"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/btn_test"
         android:layout_alignParentStart="true" />
 
     <Button
         android:text="Test de coordonnées politique"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:id="@+id/button1"
+        android:id="@+id/btn_test"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="17sp"
         android:background="@drawable/border_button"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/btn_quizz"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp"/>
 
@@ -40,12 +40,12 @@
         android:text="Quizz"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:id="@+id/button2"
+        android:id="@+id/btn_quizz"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="17sp"
         android:background="@drawable/border_button"
-        android:layout_above="@+id/button3"
-        android:layout_alignStart="@+id/button1"
+        android:layout_above="@+id/btn_mini_game"
+        android:layout_alignStart="@+id/btn_test"
         android:layout_marginBottom="11dp" />
 
 </RelativeLayout>
