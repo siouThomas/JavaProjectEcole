@@ -7,9 +7,6 @@ import android.util.Log;
 
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
-/**
- * Created by Antoine on 11/10/2016.
- */
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
   private SQLiteDatabase db;
