@@ -19,11 +19,11 @@ public class GameActivity extends AppCompatActivity
         Fragment fragment;
         String fragmentToLoad = getIntent().getStringExtra("FragmentToLoad");
         if(fragmentToLoad == "Test"){
-            fragment = TestFragment.newInstance("1", "2");
+            fragment = TestFragment.newInstance();
         } else if(fragmentToLoad == "Quizz"){
             fragment = QuizzFragment.newInstance();
         } else {    // MiniGame
-            fragment = TestFragment.newInstance("1", "2");
+            fragment = TestFragment.newInstance();
         }
 
         getFragmentManager().beginTransaction().add(R.id.activity_quizz, fragment).commit();
