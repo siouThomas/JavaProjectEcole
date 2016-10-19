@@ -3,12 +3,17 @@ package com.app.politcus.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 /**
  * Created by Antoine on 11/10/2016.
  */
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
+  private SQLiteDatabase db;
+
   public static final String TABLE_QUIZZ = "q_quizz";
   public static final String TABLE_TEST = "q_politicus_test";
 
@@ -21,38 +26,34 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   private static final int DATABASE_VERSION = 1;
 
   // Commande sql pour la création de la table
-  private static final String QUIZZ_TABLE_CREATE = "create table "
+  private static final String QUIZZ_TABLE_CREATE = "create table if not exists "
     + TABLE_QUIZZ + "(" + COLUMN_ID
     + " integer primary key autoincrement, " + COLUMN_TITLE
     + " text not null, " + COLUMN_ANSWER
     + " integer not null);";
 
   // Commande sql pour la création de la table
-  private static final String TEST_TABLE_CREATE = "create table "
+  private static final String TEST_TABLE_CREATE = "create table if not exists "
     + TABLE_TEST + "(" + COLUMN_ID
     + " integer primary key autoincrement, " + COLUMN_TITLE
     + " text not null, " + COLUMN_ORIENTATION
     + " text not null);";
 
-  private static final String QUIZZ_FILL = "insert into " + TABLE_QUIZZ + " values ('1','Quizz question 1','0');" +
-    "  insert into q_quizz values ('2','Quizz question 2','1');" +
-    "  insert into q_quizz values ('3','Quizz question 3','1');" +
-    "  insert into q_quizz values ('4','Quizz question 4','0');" +
-    "  insert into q_quizz values ('5','Quizz question 5','0');" +
-    "  insert into q_quizz values ('6','Quizz question 6','1');";
-
-  private static final String TEST_FILL = "insert into " + TABLE_TEST + " values ('1','Test question 1','G');";
+  private static final String QUIZZ_FILL = "insert or ignore into " + TABLE_QUIZZ + " (ID, TITLE, ANSWER) values (1,'Le Prince de Monaco s''appelle Robert','0');";
+  private static final String TEST_FILL = "insert or ignore into " + TABLE_TEST + " (ID, TITLE, ORIENTATION) values (1,'Entre l''intérêt des entreprises et l''intérêt de la société il y a un conflit important.','G');";
 
   public MySQLiteHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    db = getWritableDatabase();
+    db.execSQL(QUIZZ_TABLE_CREATE);
+    db.execSQL(TEST_TABLE_CREATE);
+    db.execSQL(QUIZZ_FILL);
+    db.execSQL(TEST_FILL);
     }
 
   @Override
   public void onCreate(SQLiteDatabase database) {
-    database.execSQL(QUIZZ_TABLE_CREATE);
-    database.execSQL(TEST_TABLE_CREATE);
-    database.execSQL(QUIZZ_FILL);
-    database.execSQL(TEST_FILL);
+    Log.i("testanto","Oncreate");
     }
 
   @Override

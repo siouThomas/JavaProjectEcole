@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/activity_anto_main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:paddingBottom="@dimen/activity_vertical_margin"
+  android:paddingLeft="@dimen/activity_horizontal_margin"
+  android:paddingRight="@dimen/activity_horizontal_margin"
+  android:paddingTop="@dimen/activity_vertical_margin"
+  tools:context="com.app.politcus.AntoMainActivity">
+
+  <TextView
+    android:id="@+id/tv1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Quest"/>
+  <TextView
+    android:id="@+id/tv2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Rep"
+    android:layout_below="@id/tv1"
+    />
+  <TextView
+    android:id="@+id/tv3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Rep"
+    android:layout_below="@id/tv2"
+    />
+  <TextView
+    android:id="@+id/tv4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Rep"
+    android:layout_below="@id/tv3"
+    />
+</RelativeLayout>
