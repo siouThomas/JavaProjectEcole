@@ -54,6 +54,13 @@ public class TestFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test, container, false);
+
+        currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
+        TextView progress = (TextView) view.findViewById(R.id.text_progress);
+        TextView text = (TextView) view.findViewById(R.id.text_question);
+        progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
+        text.setText(currentQuestion.getTitle());
+        
         Button nextButton = (Button) view.findViewById(R.id.btn_next);
         nextButton.setOnClickListener(this);
         return view;
