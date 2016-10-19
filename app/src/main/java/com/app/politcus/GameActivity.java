@@ -21,7 +21,7 @@ public class GameActivity extends AppCompatActivity
         if(fragmentToLoad == "Test"){
             fragment = TestFragment.newInstance("1", "2");
         } else if(fragmentToLoad == "Quizz"){
-            fragment = QuizzFragment.newInstance("1", "2");
+            fragment = QuizzFragment.newInstance();
         } else {    // MiniGame
             fragment = TestFragment.newInstance("1", "2");
         }

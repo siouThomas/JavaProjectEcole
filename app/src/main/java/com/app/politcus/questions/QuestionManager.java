@@ -121,6 +121,22 @@ public class QuestionManager {
         }
         return questionsQuizz.get(0);
     }
+
+    public QuestionQuizz getRandomQuestionQuizz(){
+        // reset counter if every questions were already used once.
+        if(questionsQuizzServed.size() == questionsQuizz.size()){
+            questionsQuizzServed.clear();
+        }
+
+        Random rand = new Random();
+        int id = -1;
+
+        do{
+            id = rand.nextInt(questionsQuizz.size());
+        } while (questionsQuizzServed.contains(id));
+
+        return getQuestionQuizzWithId(id);
+    }
 }
 
 
