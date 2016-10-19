@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.app.politcus.R;
@@ -60,7 +61,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         TextView text = (TextView) view.findViewById(R.id.text_question);
         progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
         text.setText(currentQuestion.getTitle());
-        
+
         Button nextButton = (Button) view.findViewById(R.id.btn_next);
         nextButton.setOnClickListener(this);
         return view;
@@ -113,7 +114,9 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     }
 
     public void processScore() {
+        SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
         Orientation orientation = currentQuestion.getOrientation();
+
         float modifier = 0;
         switch (orientation) {
             case Droite:
