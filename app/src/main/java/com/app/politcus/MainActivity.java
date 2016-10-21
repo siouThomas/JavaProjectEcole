@@ -15,11 +15,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Define interractions for the 3 buttons
         Button testButton = (Button) findViewById(R.id.btn_test);
         Button quizzButton = (Button) findViewById(R.id.btn_quizz);
-        Button miniGameButton = (Button) findViewById(R.id.btn_mini_game);
 
         testButton.setOnClickListener(this);
         quizzButton.setOnClickListener(this);
-        miniGameButton.setOnClickListener(this);
     }
 
     @Override
@@ -28,8 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.onTestButtonClick((Button) v);
         } else if(v.getId() == R.id.btn_quizz){
             this.onQuizzButtonClick((Button) v);
-        } else if(v.getId() == R.id.btn_mini_game){
-            this.onMiniGameButtonClick((Button) v);
         }
     }
 

@@ -4,18 +4,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/white">
 
-    <Button
-        android:text="Mini-jeu"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:id="@+id/btn_mini_game"
-        android:layout_marginBottom="28dp"
-        android:textColor="@android:color/holo_red_dark"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btn_quizz"
-        android:textSize="17sp"
-        android:background="@drawable/border_button" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,9 +20,9 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="17sp"
         android:background="@drawable/border_button"
-        android:layout_above="@+id/btn_quizz"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"/>
+        android:layout_marginBottom="103dp"
+        android:layout_alignBottom="@+id/btn_quizz"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Quizz"
@@ -44,8 +32,9 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="17sp"
         android:background="@drawable/border_button"
-        android:layout_above="@+id/btn_mini_game"
-        android:layout_alignStart="@+id/btn_test"
-        android:layout_marginBottom="11dp" />
+
+        android:layout_marginBottom="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_test" />
 
 </RelativeLayout>
