@@ -169,6 +169,11 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         float hScoreFinal = hScore / hScoreMax;
         float vScoreFinal = vScore / vScoreMax;
 
+        QuestionManager.getInstance().insertResultsTest(hScoreFinal,vScoreFinal);
 
+        /*
+        Fragment fragment =  TestResultFragment.newInstance();
+
+        getFragmentManager().beginTransaction().add(R.id.activity_quizz, fragment).commit();*/
     }
 }

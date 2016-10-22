@@ -162,6 +162,18 @@ public class QuestionManager {
         }
         return nb;
     }
+
+    public void insertResultsTest(float hScoreFinal, float vScoreFinal){
+        DAO.getInstance().insertResultsTest(hScoreFinal,vScoreFinal);
+    }
+
+    public float getLastHorizontalResultTest(){
+        return DAO.getInstance().getLastHorizontalResultTest();
+    }
+
+    public float getLastVerticalResultTest(){
+        return DAO.getInstance().getLastVerticalResultTest();
+    }
 }
 
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.app.politcus.game.QuizzFragment;
 import com.app.politcus.game.test.TestFragment;
+import com.app.politcus.game.test.TestResultFragment;
 
 public class GameActivity extends AppCompatActivity
         implements TestFragment.OnFragmentInteractionListener, QuizzFragment.OnFragmentInteractionListener{
