@@ -1,6 +1,11 @@
 package com.app.politcus.game.test;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -29,12 +35,13 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private int hScore = 0;
     private int vScore = 0;
-    private int hScorePlusMax = 0;
-    private int hScoreMinusMax = 0;
-    private int vScorePlusMax = 0;
-    private int vScoreMinusMax = 0;
+    private int scoreGauche = 0;
+    private int scoreDroite = 0;
+    private int scoreLibertaire = 0;
+    private int scoreCommunautariste = 0;
     private QuestionTest currentQuestion;
     private int currentProgress = 1;
+    private int nbQuestionsTest;
 
     public TestFragment() {
         // Required empty public constructor
@@ -56,10 +63,11 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test, container, false);
 
+        nbQuestionsTest = QuestionManager.getInstance().getQuestionsTestNumber();
         currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
         TextView progress = (TextView) view.findViewById(R.id.text_progress);
         TextView text = (TextView) view.findViewById(R.id.text_question);
-        progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
+        progress.setText("Question " + Integer.toString(currentProgress) + " sur " + Integer.toString(nbQuestionsTest));
         text.setText(currentQuestion.getTitle());
 
         Button nextButton = (Button) view.findViewById(R.id.btn_next);
@@ -95,18 +103,25 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if(view.getId() == R.id.btn_next){
             processScore();
-            displayNextQuestion();
+            if (currentProgress<nbQuestionsTest)
+                displayNextQuestion();
+            else
+                showResults();
         }
     }
+
 
     private void displayNextQuestion() {
         currentProgress++;
         currentQuestion = QuestionManager.getInstance().getQuestionTestWithId(currentProgress);
         TextView progress = (TextView) getView().findViewById(R.id.text_progress);
         TextView text = (TextView) getView().findViewById(R.id.text_question);
+        Button nextButton = (Button) getView().findViewById(R.id.btn_next);
 
-        progress.setText("Question " + Integer.toString(currentProgress) + " sur 36");
+        progress.setText("Question " + Integer.toString(currentProgress) + " sur " + Integer.toString(nbQuestionsTest));
         text.setText(currentQuestion.getTitle());
+        if (currentProgress == nbQuestionsTest)
+            nextButton.setText("Terminer");
     }
 
     public interface OnFragmentInteractionListener {
@@ -118,24 +133,42 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
         Orientation orientation = currentQuestion.getOrientation();
 
-        float modifier = 0;
+
+        int choix = bar.getProgress()-2;
         switch (orientation) {
             case Droite:
-                hScorePlusMax++;
-                hScore += modifier;
+                //scoreDroite += choix;
+                hScore += choix;
                 break;
             case Gauche:
-                hScoreMinusMax++;
-                hScore -= modifier;
+                //scoreGauche += choix;
+                hScore -= choix;
                 break;
             case Communautariste:
-                vScorePlusMax++;
-                vScore += modifier;
+                //scoreCommunautariste += choix;
+                vScore += choix;
                 break;
             case Libertaire:
-                vScoreMinusMax++;
-                vScore -= modifier;
+                //scoreLibertaire+=choix;
+                vScore -= choix;
                 break;
         }
+    }
+
+    private void showResults() {
+
+
+        int nbGauche = QuestionManager.getInstance().getQuestionsTestGaucheNumber();
+        int nbDroite = QuestionManager.getInstance().getQuestionsTestDroiteNumber();
+        int nbCommunautariste = QuestionManager.getInstance().getQuestionsTestCommunautaristeNumber();
+        int nbLibertaire = QuestionManager.getInstance().getQuestionsTestLibertaireNumber();
+
+        int hScoreMax = 2*nbGauche + 2*nbDroite;
+        int vScoreMax = 2*nbLibertaire +2*nbCommunautariste;
+
+        float hScoreFinal = hScore / hScoreMax;
+        float vScoreFinal = vScore / vScoreMax;
+
+
     }
 }

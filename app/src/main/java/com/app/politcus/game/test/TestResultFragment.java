@@ -78,4 +78,28 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
         void onFragmentInteraction(Uri uri);
     }
 
+    /*
+            BitmapFactory.Options myOptions = new BitmapFactory.Options();
+        myOptions.inDither = true;
+        myOptions.inScaled = false;
+        myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// important
+
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grid,myOptions);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLUE);
+
+
+        Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
+        Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+
+        Canvas canvas = new Canvas(mutableBitmap);
+        canvas.drawCircle(60, 50, 25, paint);
+
+        ImageView imageView = (ImageView) findViewById(R.id.schoolboard_image_view);
+        imageView.setAdjustViewBounds(true);
+        imageView.setImageBitmap(mutableBitmap);
+     */
 }

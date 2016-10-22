@@ -122,7 +122,48 @@ public class QuestionManager {
 
         return getQuestionQuizzWithId(id);
     }
+
+    public int getQuestionsTestNumber(){
+        return questionsTest.size();
+    }
+
+    public int getQuestionsTestGaucheNumber(){
+        int nb = 0;
+        for (int i=0;i<questionsTest.size();i++){
+            if (questionsTest.get(i).getOrientation() == Orientation.Gauche)
+                nb++;
+        }
+        return nb;
+    }
+
+    public int getQuestionsTestDroiteNumber(){
+        int nb = 0;
+        for (int i=0;i<questionsTest.size();i++){
+            if (questionsTest.get(i).getOrientation() == Orientation.Droite)
+                nb++;
+        }
+        return nb;
+    }
+
+    public int getQuestionsTestLibertaireNumber(){
+        int nb = 0;
+        for (int i=0;i<questionsTest.size();i++){
+            if (questionsTest.get(i).getOrientation() == Orientation.Libertaire)
+                nb++;
+        }
+        return nb;
+    }
+
+    public int getQuestionsTestCommunautaristeNumber(){
+        int nb = 0;
+        for (int i=0;i<questionsTest.size();i++){
+            if (questionsTest.get(i).getOrientation() == Orientation.Communautariste)
+                nb++;
+        }
+        return nb;
+    }
 }
+
 
 
 /* Cache manamgent should go to the DAO
