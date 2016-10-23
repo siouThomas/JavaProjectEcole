@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.app.politcus.game.test.TestResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,41 +14,41 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Resultat"
+            android:layout_height="wrap_content"
+            android:text="Résultat :\nDroitard Communautariste"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@color/holo_red_dark"
-            android:id="@+id/text_progress" />
+            android:id="@+id/text_result"
+            android:layout_marginBottom="10dp"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:layout_weight="0.37">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/grid"
-                android:id="@+id/grid"/>
 
-        </RelativeLayout>
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/grid"
+            android:id="@+id/grid"
+            android:layout_gravity="center"/>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
-                android:text="Suivant"
+                android:text="retour"
                 android:textColor="@color/holo_red_dark"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:background="@drawable/border_button"
                 android:layout_width="133dp"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/btn_back"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="30dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 

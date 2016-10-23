@@ -146,11 +146,11 @@ public class TestFragment extends Fragment implements View.OnClickListener {
                 break;
             case Communautariste:
                 //scoreCommunautariste += choix;
-                vScore += choix;
+                vScore -= choix;
                 break;
             case Libertaire:
                 //scoreLibertaire+=choix;
-                vScore -= choix;
+                vScore += choix;
                 break;
         }
     }
@@ -166,11 +166,10 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         int hScoreMax = 2*nbGauche + 2*nbDroite;
         int vScoreMax = 2*nbLibertaire +2*nbCommunautariste;
 
-        float hScoreFinal = hScore / hScoreMax;
-        float vScoreFinal = vScore / vScoreMax;
+        float hScoreFinal = (hScore + hScoreMax) / (2 * hScoreMax);
+        float vScoreFinal = (vScore + vScoreMax) / (2 * vScoreMax);
 
         QuestionManager.getInstance().insertResultsTest(hScoreFinal,vScoreFinal);
-
 
         Fragment fragment =  TestResultFragment.newInstance();
 

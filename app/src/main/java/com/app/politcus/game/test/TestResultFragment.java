@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.politcus.R;
 import com.app.politcus.questions.QuestionManager;
@@ -44,34 +45,30 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_test_result, container, false);
+
+
         Button backButton = (Button) view.findViewById(R.id.btn_back);
         backButton.setOnClickListener(this);
 
         hScoreFinal = QuestionManager.getInstance().getLastHorizontalResultTest();
         vScoreFinal = QuestionManager.getInstance().getLastVerticalResultTest();
 
-        BitmapFactory.Options myOptions = new BitmapFactory.Options();
-        myOptions.inDither = true;
-        myOptions.inScaled = false;
-        myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// important
+        String resultText = " Résultat :\n";
 
+        if (hScoreFinal < 0.5)
+            resultText += "Gaucho ";
+        else
+            resultText += "Droitard ";
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grid,myOptions);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLUE);
+        if (vScoreFinal<0.5)
+            resultText+= "Communautariste";
+        else
+            resultText += "Libertaire";
 
+        TextView tv_res = (TextView) view.findViewById(R.id.text_result);
+        tv_res.setText(resultText);
 
-        Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
-        Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
-
-
-        Canvas canvas = new Canvas(mutableBitmap);
-        canvas.drawCircle(60, 50, 25, paint);
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.grid);
-        imageView.setAdjustViewBounds(true);
-        imageView.setImageBitmap(mutableBitmap);
+        addResultCircle(view);
 
         return view;
     }
@@ -110,5 +107,33 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void addResultCircle(View view){
+        BitmapFactory.Options myOptions = new BitmapFactory.Options();
+        myOptions.inDither = true;
+        myOptions.inScaled = false;
+        myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grid,myOptions);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(Color.RED);
+
+        Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
+        Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        float height = bitmap.getHeight();
+        float width = bitmap.getWidth();
+
+        double widthPosit = width*hScoreFinal ;
+        double heightPosit = height*vScoreFinal ;
+
+        Canvas canvas = new Canvas(mutableBitmap);
+        canvas.drawCircle((float)widthPosit , (float)heightPosit, 15, paint);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.grid);
+        imageView.setAdjustViewBounds(true);
+        imageView.setImageBitmap(mutableBitmap);
     }
 }
