@@ -23,7 +23,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:id="@+id/text_question"
             android:layout_weight="0.84"
             android:text="Selon la mythologie grecque, les romains croyaient en l'existence du Liebert, terrassant la menace de la pomme un kebab à la main"

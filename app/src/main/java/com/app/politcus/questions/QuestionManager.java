@@ -174,6 +174,14 @@ public class QuestionManager {
     public float getLastVerticalResultTest(){
         return DAO.getInstance().getLastVerticalResultTest();
     }
+
+    public void insertBestScoreQuizz(int score){
+        DAO.getInstance().insertBestScoreQuizz(score);
+    }
+
+    public int getBestScoreQuizz(){
+        return DAO.getInstance().getBestScoreQuizz();
+    }
 }
 
 

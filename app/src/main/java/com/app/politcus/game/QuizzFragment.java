@@ -26,8 +26,8 @@ import com.app.politcus.questions.QuestionQuizz;
 public class QuizzFragment extends Fragment implements View.OnClickListener {
 
     private QuestionQuizz currentQuestion;
-    private int score;
-    private boolean gameOver;
+    private int score=0;
+    private boolean gameOver = false;
     private OnFragmentInteractionListener mListener;
 
     public QuizzFragment() {
@@ -42,7 +42,6 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        score = 0;
     }
 
     @Override
@@ -96,22 +95,37 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
                 score++;
                 displayNextRandomQuestion();
             } else {
+                gameOver=true;
                 displayGameOverMessage();
             }
         } else if(view.getId() == R.id.btn_false) {
             if(gameOver) {
-                Log.i("Log", "You are not allowed to stop playing");
+                // TODO : Retour au menu principal
             } else if (currentQuestion.getAnswer()) { // Incorrect Answer
+                gameOver=true;
                 displayGameOverMessage();
             } else {
+                score++;
                 displayNextRandomQuestion();
             }
         }
     }
 
     private void displayGameOverMessage() {
-        TextView text = (TextView) getView().findViewById(R.id.text_question);
-        text.setText("Partie terminée ! \n Score : " + Integer.toString(score));
+
+        int bestScore = QuestionManager.getInstance().getBestScoreQuizz();
+
+        if (bestScore < score) {
+            bestScore = score;
+            QuestionManager.getInstance().insertBestScoreQuizz(bestScore);
+        }
+
+        TextView textQuestion = (TextView) getView().findViewById(R.id.text_question);
+
+        textQuestion.setText("Partie terminée ! \n Score : " + Integer.toString(score) + "\n\nMeilleur score : " + bestScore);
+
+        TextView textProgress = (TextView) getView().findViewById(R.id.text_progress);
+        textProgress.setText("");
 
         Button trueButton = (Button) getView().findViewById(R.id.btn_true);
         Button falseButton = (Button) getView().findViewById(R.id.btn_false);
@@ -127,13 +141,16 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
 
     public void displayNextRandomQuestion(){
         currentQuestion = QuestionManager.getInstance().getRandomQuestionQuizz();
-        TextView text = (TextView) getView().findViewById(R.id.text_question);
+        TextView textQuestion = (TextView) getView().findViewById(R.id.text_question);
+        TextView textProgress = (TextView) getView().findViewById(R.id.text_progress);
 
-        text.setText(currentQuestion.getTitle());
+        textProgress.setText("Question " + (score+1));
+        textQuestion.setText(currentQuestion.getTitle());
     }
 
     public void RestartGame(){
         score = 0;
+        gameOver = false;
         Button trueButton = (Button) getView().findViewById(R.id.btn_true);
         Button falseButton = (Button) getView().findViewById(R.id.btn_false);
 

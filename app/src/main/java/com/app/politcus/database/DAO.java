@@ -22,6 +22,9 @@ public class DAO {
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ORIENTATION };
   private String[] allColumnsResultsTest = { MySQLiteHelper.COLUMN_ID,
           MySQLiteHelper.COLUMN_HORIZONTAL_RESULT, MySQLiteHelper.COLUMN_VERTICAL_RESULT };
+  private String[] allColumnsBestScoreQuizz = { MySQLiteHelper.COLUMN_ID,
+          MySQLiteHelper.COLUMN_SCORE};
+
 
   private static DAO instance = null;
 
@@ -210,7 +213,7 @@ public class DAO {
   }
 
   public float getLastHorizontalResultTest(){
-
+    this.open();
     Cursor cursor = database.query(MySQLiteHelper.TABLE_RESULTS_TEST,
             allColumnsResultsTest, null, null, null, null, null);
 
@@ -220,12 +223,31 @@ public class DAO {
   }
 
   public float getLastVerticalResultTest(){
-
+    this.open();
     Cursor cursor = database.query(MySQLiteHelper.TABLE_RESULTS_TEST,
             allColumnsResultsTest, null, null, null, null, null);
 
     cursor.moveToLast();
 
     return cursor.getFloat(2);
+  }
+
+  public void insertBestScoreQuizz(int score){
+    this.open();
+    database.delete(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ, null, null);
+
+    ContentValues values = new ContentValues();
+    values.put(MySQLiteHelper.COLUMN_SCORE, score);
+
+    database.insert(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ,null,values);
+  }
+
+  public int getBestScoreQuizz(){
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ,
+            allColumnsBestScoreQuizz, null, null, null, null, null);
+
+    cursor.moveToFirst();
+    return cursor.getInt(1);
   }
 }

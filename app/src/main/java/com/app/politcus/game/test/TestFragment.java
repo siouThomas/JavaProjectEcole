@@ -171,8 +171,6 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
         QuestionManager.getInstance().insertResultsTest(hScoreFinal,vScoreFinal);
 
-        Fragment fragment =  TestResultFragment.newInstance();
-
-        getFragmentManager().beginTransaction().add(R.id.activity_quizz, fragment).commit();
+        // TODO : lancer le fragment TestResultFragment
     }
 }
