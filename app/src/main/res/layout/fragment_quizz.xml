@@ -4,13 +4,22 @@
     android:layout_height="match_parent"
     tools:context="com.app.politcus.game.QuizzFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Question 1"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/holo_red_dark"
+            android:id="@+id/text_progress" />
 
         <TextView
             android:layout_width="match_parent"
@@ -20,10 +29,11 @@
             android:text="Selon la mythologie grecque, les romains croyaient en l'existence du Liebert, terrassant la menace de la pomme un kebab à la main"
             android:fontFamily="sans-serif"
             android:typeface="sans"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:lineSpacingExtra="8sp"
             android:textAlignment="center"
-            android:paddingTop="32sp" />
+            android:paddingTop="32sp"
+            android:textColor="@color/black"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -36,14 +46,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_true"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="@color/holo_red_dark"
+                android:textSize="20sp"
+                android:background="@drawable/border_button"
+                android:layout_marginRight="5dp"/>
 
             <Button
                 android:text="Faux"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_false"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textColor="@color/holo_red_dark"
+                android:textSize="20sp"
+                android:background="@drawable/border_button"
+                android:layout_marginLeft="5dp"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>
