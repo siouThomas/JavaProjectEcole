@@ -117,7 +117,7 @@ public class QuestionManager {
         int id = -1;
 
         do{
-            id = rand.nextInt(questionsQuizz.size());
+            id = rand.nextInt(questionsQuizz.size()+1);
         } while (questionsQuizzServed.contains(id));
 
         return getQuestionQuizzWithId(id);

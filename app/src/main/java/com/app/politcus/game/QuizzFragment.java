@@ -122,7 +122,7 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
 
         TextView textQuestion = (TextView) getView().findViewById(R.id.text_question);
 
-        textQuestion.setText("Partie terminée ! \n Score : " + Integer.toString(score) + "\n\nMeilleur score : " + bestScore);
+        textQuestion.setText("Perdu ! \n Score : " + Integer.toString(score) + "\n\nMeilleur score : " + bestScore);
 
         TextView textProgress = (TextView) getView().findViewById(R.id.text_progress);
         textProgress.setText("");

@@ -24,6 +24,8 @@ public class DAO {
           MySQLiteHelper.COLUMN_HORIZONTAL_RESULT, MySQLiteHelper.COLUMN_VERTICAL_RESULT };
   private String[] allColumnsBestScoreQuizz = { MySQLiteHelper.COLUMN_ID,
           MySQLiteHelper.COLUMN_SCORE};
+  private String[] allColumnsUUID = { MySQLiteHelper.COLUMN_ID,
+          MySQLiteHelper.COLUMN_UUID };
 
 
   private static DAO instance = null;
@@ -249,5 +251,18 @@ public class DAO {
 
     cursor.moveToFirst();
     return cursor.getInt(1);
+  }
+
+  public String getUUID(){
+
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_UUID,
+            allColumnsUUID, null, null, null, null, null);
+    cursor.moveToFirst();
+
+    String uuid = cursor.getString(1);
+    cursor.close();
+
+    return uuid;
   }
 }

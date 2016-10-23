@@ -1,23 +1,23 @@
-package com.app.politcus.game.test;
+package com.app.politcus.game.test_coord;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.app.politcus.App;
 import com.app.politcus.R;
+import com.app.politcus.database.SendResultManager;
 import com.app.politcus.questions.Orientation;
 import com.app.politcus.questions.QuestionManager;
 import com.app.politcus.questions.QuestionTest;
@@ -72,6 +72,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
         Button nextButton = (Button) view.findViewById(R.id.btn_next);
         nextButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -157,7 +158,6 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
     private void showResults() {
 
-
         int nbGauche = QuestionManager.getInstance().getQuestionsTestGaucheNumber();
         int nbDroite = QuestionManager.getInstance().getQuestionsTestDroiteNumber();
         int nbCommunautariste = QuestionManager.getInstance().getQuestionsTestCommunautaristeNumber();
@@ -166,10 +166,29 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         int hScoreMax = 2*nbGauche + 2*nbDroite;
         int vScoreMax = 2*nbLibertaire +2*nbCommunautariste;
 
-        float hScoreFinal = (hScore + hScoreMax) / (2 * hScoreMax);
-        float vScoreFinal = (vScore + vScoreMax) / (2 * vScoreMax);
+        float hScoreFinal = ((float) hScore + hScoreMax) / ((float) 2 * hScoreMax);
+        float vScoreFinal = ((float) vScore + vScoreMax) / ((float) 2 * vScoreMax);
+
 
         QuestionManager.getInstance().insertResultsTest(hScoreFinal,vScoreFinal);
+
+        String result = "";
+        if (hScoreFinal<0.5)
+            result = "G";
+        else
+            result = "D";
+
+        if (vScoreFinal<0.5)
+            result += "C";
+        else
+            result += "L";
+
+
+        if (ContextCompat.checkSelfPermission(App.getContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            SendResultManager sendResultManager = new SendResultManager(result);
+        }
 
         // TODO : lancer le fragment TestResultFragment
     }

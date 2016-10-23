@@ -1,6 +1,7 @@
 package com.app.politcus.database;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,7 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.app.politcus.App;
-import android.Manifest;
+import com.app.politcus.GameActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderApi;
@@ -17,66 +18,58 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-import static android.support.v4.app.ActivityCompat.requestPermissions;
-
 
 /**
  * Created by Antoine on 19/10/2016.
  */
 
-public class LocationManagement implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+public class SendResultManager implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
   private GoogleApiClient mGoogleApiClient;
   private FusedLocationProviderApi fusedLocationProviderApi;
+  private String resultat;
 
-public LocationManagement(){
+  public SendResultManager(String resultat){
 
+    this.resultat = resultat;
 
-  if (mGoogleApiClient == null) {
-    mGoogleApiClient = new GoogleApiClient.Builder(App.getContext())
-      .addConnectionCallbacks(this)
-      .addOnConnectionFailedListener(this)
-      .addApi(LocationServices.API)
-      .build();
+    if (mGoogleApiClient == null) {
+      mGoogleApiClient = new GoogleApiClient.Builder(App.getContext())
+              .addConnectionCallbacks(this)
+              .addOnConnectionFailedListener(this)
+              .addApi(LocationServices.API)
+              .build();
+    }
+    mGoogleApiClient.connect();
   }
-  mGoogleApiClient.connect();
-}
 
   @Override
   public void onConnected(Bundle connectionHint) {
 
 
     int permissionCheck = ContextCompat.checkSelfPermission(App.getContext(),
-      "android.permission.ACCESS_COARSE_LOCATION");
+            "android.permission.ACCESS_COARSE_LOCATION");
     int permissionCheck2 = ContextCompat.checkSelfPermission(App.getContext(),
-      "android.permission.ACCESS_FINE_LOCATION");
+            "android.permission.ACCESS_FINE_LOCATION");
 
 
     LocationRequest mLocationRequest = LocationRequest.create();
     mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    mLocationRequest.setInterval(1000); // Update location every second
+    mLocationRequest.setInterval(1000);
 
+    /*
     if (ContextCompat.checkSelfPermission(App.getContext(),
-      android.Manifest.permission.ACCESS_FINE_LOCATION)
-      != PackageManager.PERMISSION_GRANTED) {
+            android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(
-        (Activity)App.getContext(), // Activity
-        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-        111);
-    }
+              (Activity) App.getContext(),
+              new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+              111);
+    }*/
 
 
     LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-    Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-      mGoogleApiClient);
-
-
-    double latitude =  mLastLocation.getLatitude();
-
-    if (mLastLocation != null) {
-      System.out.println(String.valueOf(mLastLocation.getLatitude()));
-      System.out.println(String.valueOf(mLastLocation.getLongitude()));
-    }
+    //Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
   }
 
   // Get permission result
@@ -85,7 +78,7 @@ public LocationManagement(){
     switch (requestCode) {
       case 111: {
         if (grantResults.length > 0
-          && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
           // permission was granted
 
         } else {
@@ -118,14 +111,17 @@ public LocationManagement(){
   @Override
   public void onLocationChanged(Location location) {
 
-    System.out.println(String.valueOf(location.getLatitude()));
-    System.out.println(String.valueOf(location.getLongitude()));
+    //System.out.println(String.valueOf(location.getLatitude()));
+    //System.out.println(String.valueOf(location.getLongitude()));
+
+    AsyncSendResultTest asyncSendResultTest = new AsyncSendResultTest();
+
+    asyncSendResultTest.execute(resultat,String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()));
 
     LocationServices.FusedLocationApi.removeLocationUpdates(
-      mGoogleApiClient, this);
+            mGoogleApiClient, this);
 
     mGoogleApiClient.disconnect();
   }
 
 }
-

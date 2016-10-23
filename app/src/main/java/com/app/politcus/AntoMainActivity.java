@@ -1,29 +1,9 @@
 package com.app.politcus;
 
-import android.*;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.app.politcus.database.DAO;
-import com.app.politcus.database.LocationManagement;
-import com.app.politcus.questions.QuestionManager;
-import com.app.politcus.questions.QuestionQuizz;
-import com.app.politcus.questions.QuestionTest;
-
-import java.util.ArrayList;
 
 public class AntoMainActivity extends AppCompatActivity {
 
@@ -57,7 +37,7 @@ public class AntoMainActivity extends AppCompatActivity {
     tv4.setText(Integer.toString(nbQuestionsQuizz));
 
 
-    LocationManagement locationManagement = new LocationManagement();*/
+    SendResultManager locationManagement = new SendResultManager();*/
 
     Button backButton = (Button) findViewById(R.id.btn_back);
 

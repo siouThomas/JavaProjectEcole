@@ -1,4 +1,4 @@
-package com.app.politcus.game.test;
+package com.app.politcus.game.test_coord;
 
 import android.content.Context;
 import android.graphics.Bitmap;
