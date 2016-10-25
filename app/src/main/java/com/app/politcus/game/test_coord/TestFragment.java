@@ -192,4 +192,44 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
         // TODO : lancer le fragment TestResultFragment
     }
+
+    public void setProgressBarColor()
+    {
+        SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
+        int progress= bar.getProgress();
+
+
+        if (progress<2)
+        {
+            bar.setProgressDrawable(getView().getResources().getDrawable(R.drawable.progressbar_red));
+            bar.setSecondaryProgress(0);
+        }
+        else
+        {
+            bar.setProgressDrawable(getView().getResources().getDrawable(R.drawable.progressbar_green));
+            bar.setSecondaryProgress(2);
+        }
+    }
+
+    public void onResume()
+    {
+        super.onResume();
+        SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
+        bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setProgressBarColor();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
 }
