@@ -7,9 +7,10 @@ import android.os.Bundle;
 
 import com.app.politcus.game.QuizzFragment;
 import com.app.politcus.game.test_coord.TestFragment;
+import com.app.politcus.game.test_coord.TestResultFragment;
 
 public class GameActivity extends AppCompatActivity
-        implements TestFragment.OnFragmentInteractionListener, QuizzFragment.OnFragmentInteractionListener{
+        implements TestFragment.OnFragmentInteractionListener, QuizzFragment.OnFragmentInteractionListener, TestResultFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class GameActivity extends AppCompatActivity
             fragment = TestFragment.newInstance();
         }
 
-        getFragmentManager().beginTransaction().add(R.id.activity_quizz, fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.activity_game, fragment).commit();
     }
 
     @Override

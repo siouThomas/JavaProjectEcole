@@ -1,6 +1,7 @@
 package com.app.politcus.game;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.app.politcus.App;
+import com.app.politcus.MainActivity;
 import com.app.politcus.R;
 import com.app.politcus.questions.QuestionManager;
 import com.app.politcus.questions.QuestionQuizz;
@@ -62,7 +65,6 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -100,7 +102,8 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
             }
         } else if(view.getId() == R.id.btn_false) {
             if(gameOver) {
-                // TODO : Retour au menu principal
+                Intent nextActivity = new Intent(App.getContext(), MainActivity.class);
+                startActivity(nextActivity);
             } else if (currentQuestion.getAnswer()) { // Incorrect Answer
                 gameOver=true;
                 displayGameOverMessage();
@@ -135,7 +138,6 @@ public class QuizzFragment extends Fragment implements View.OnClickListener {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 

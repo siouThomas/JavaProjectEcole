@@ -1,6 +1,7 @@
 package com.app.politcus.game.test_coord;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.app.politcus.App;
+import com.app.politcus.GameActivity;
+import com.app.politcus.MainActivity;
 import com.app.politcus.R;
 import com.app.politcus.questions.QuestionManager;
 
@@ -73,7 +77,6 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -100,12 +103,12 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btn_back){
-            // TODO : Find a way to go to main menu
+            Intent nextActivity = new Intent(App.getContext(), MainActivity.class);
+            startActivity(nextActivity);
         }
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -118,7 +121,7 @@ public class TestResultFragment extends Fragment implements View.OnClickListener
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grid,myOptions);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
+        paint.setColor(Color.BLACK);
 
         Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
         Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);

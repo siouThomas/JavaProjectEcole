@@ -76,7 +76,6 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -126,14 +125,12 @@ public class TestFragment extends Fragment implements View.OnClickListener {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
     public void processScore() {
         SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
         Orientation orientation = currentQuestion.getOrientation();
-
 
         int choix = bar.getProgress()-2;
         switch (orientation) {
@@ -190,19 +187,20 @@ public class TestFragment extends Fragment implements View.OnClickListener {
             SendResultManager sendResultManager = new SendResultManager(result);
         }
 
-        // TODO : lancer le fragment TestResultFragment
+        getFragmentManager().beginTransaction().replace(R.id.activity_game,TestResultFragment.newInstance()).commit();
     }
 
     public void setProgressBarColor()
     {
+
         SeekBar bar = (SeekBar) getView().findViewById(R.id.progress_bar);
         int progress= bar.getProgress();
-
+        bar.setSecondaryProgress(2);
 
         if (progress<2)
         {
             bar.setProgressDrawable(getView().getResources().getDrawable(R.drawable.progressbar_red));
-            bar.setSecondaryProgress(0);
+            bar.setSecondaryProgress(2);
         }
         else
         {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/progressbar_red">
 
     <item android:id="@android:id/background">
         <shape android:shape="rectangle" >
@@ -7,10 +8,10 @@
 
             <gradient
                 android:angle="270"
-                android:endColor="#cccccc"
-                android:centerColor="#cccccc"
+                android:endColor="#62c900"
+                android:centerColor="#62c900"
                 android:centerY="0.75"
-                android:startColor="#d3d3d3" />
+                android:startColor="#62c900" />
         </shape>
     </item>
 
