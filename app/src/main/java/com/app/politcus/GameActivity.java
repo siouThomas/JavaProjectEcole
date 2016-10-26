@@ -23,9 +23,7 @@ public class GameActivity extends AppCompatActivity
             fragment = TestFragment.newInstance();
         } else if(fragmentToLoad.equals("Quizz")){
             fragment = QuizzFragment.newInstance();
-        } else {    // MiniGame
-            fragment = TestFragment.newInstance();
-        }
+        } 
 
         getFragmentManager().beginTransaction().replace(R.id.activity_game, fragment).commit();
     }
