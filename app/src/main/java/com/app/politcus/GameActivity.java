@@ -17,7 +17,7 @@ public class GameActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
       //System.out.println("testou1");
-        Fragment fragment;
+        Fragment fragment = new Fragment();
         String fragmentToLoad = getIntent().getStringExtra("FragmentToLoad");
         if(fragmentToLoad.equals("Test")){
             fragment = TestFragment.newInstance();
