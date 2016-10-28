@@ -18,7 +18,7 @@ import com.app.politcus.App;
 /**
  * Created by Thomas on 19/10/2016.
  */
-public class QuestionContentProvider extends ContentProvider{
+public class QuestionProvider extends ContentProvider{
 
     public static final String APP_NAME = "com.app.politcus";
     //:::::::::::::::::::::::::://
