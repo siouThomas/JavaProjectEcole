@@ -20,6 +20,13 @@ public class DAO {
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ANSWER };
   private String[] allColumnsTest = { MySQLiteHelper.COLUMN_ID,
     MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_ORIENTATION };
+  private String[] allColumnsResultsTest = { MySQLiteHelper.COLUMN_ID,
+          MySQLiteHelper.COLUMN_HORIZONTAL_RESULT, MySQLiteHelper.COLUMN_VERTICAL_RESULT };
+  private String[] allColumnsBestScoreQuizz = { MySQLiteHelper.COLUMN_ID,
+          MySQLiteHelper.COLUMN_SCORE};
+  private String[] allColumnsUUID = { MySQLiteHelper.COLUMN_ID,
+          MySQLiteHelper.COLUMN_UUID };
+
 
   private static DAO instance = null;
 
@@ -37,7 +44,7 @@ public class DAO {
   private DAO() {
     dbHelper = new MySQLiteHelper(App.getContext());
     if(dbHelper == null){
-      Log.i("Error", "il s'est passé une merde");
+      Log.i("Error", "Problème initialisation dbHelper");
     } else {
       Log.i("Error", "db helper initialisé");
     }
@@ -79,7 +86,7 @@ public class DAO {
     ArrayList<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
 
     this.open();
-    Cursor cursor = database.query(dbHelper.TABLE_QUIZZ,
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_QUIZZ,
       allColumnsQuizz, null, null, null, null, null);
 
     cursor.moveToFirst();
@@ -100,7 +107,7 @@ public class DAO {
 
     //List<QuestionQuizz> questionsQuizz = new ArrayList<QuestionQuizz>();
     this.open();
-    Cursor cursor = database.query(dbHelper.TABLE_TEST,
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_TEST,
       allColumnsTest, null, null, null, null, null);
 
     cursor.moveToFirst();
@@ -198,4 +205,64 @@ public class DAO {
     //this.close();
   }
 
+  public void insertResultsTest(float hScoreFinal, float vScoreFinal){
+    this.open();
+    ContentValues values = new ContentValues();
+    values.put(MySQLiteHelper.COLUMN_HORIZONTAL_RESULT, hScoreFinal);
+    values.put(MySQLiteHelper.COLUMN_VERTICAL_RESULT, vScoreFinal);
+    database.insert(MySQLiteHelper.TABLE_RESULTS_TEST, null,
+            values);
+  }
+
+  public float getLastHorizontalResultTest(){
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_RESULTS_TEST,
+            allColumnsResultsTest, null, null, null, null, null);
+
+    cursor.moveToLast();
+
+    return cursor.getFloat(1);
+  }
+
+  public float getLastVerticalResultTest(){
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_RESULTS_TEST,
+            allColumnsResultsTest, null, null, null, null, null);
+
+    cursor.moveToLast();
+
+    return cursor.getFloat(2);
+  }
+
+  public void insertBestScoreQuizz(int score){
+    this.open();
+    database.delete(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ, null, null);
+
+    ContentValues values = new ContentValues();
+    values.put(MySQLiteHelper.COLUMN_SCORE, score);
+
+    database.insert(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ,null,values);
+  }
+
+  public int getBestScoreQuizz(){
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_BEST_SCORE_QUIZZ,
+            allColumnsBestScoreQuizz, null, null, null, null, null);
+
+    cursor.moveToFirst();
+    return cursor.getInt(1);
+  }
+
+  public String getUUID(){
+
+    this.open();
+    Cursor cursor = database.query(MySQLiteHelper.TABLE_UUID,
+            allColumnsUUID, null, null, null, null, null);
+    cursor.moveToFirst();
+
+    String uuid = cursor.getString(1);
+    cursor.close();
+
+    return uuid;
+  }
 }

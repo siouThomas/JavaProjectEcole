@@ -1,39 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/activity_anto_main"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:paddingBottom="@dimen/activity_vertical_margin"
-  android:paddingLeft="@dimen/activity_horizontal_margin"
-  android:paddingRight="@dimen/activity_horizontal_margin"
-  android:paddingTop="@dimen/activity_vertical_margin"
-  tools:context="com.app.politcus.AntoMainActivity">
+  <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context="com.app.politcus.AntoMainActivity">
 
-  <TextView
-    android:id="@+id/tv1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Quest"/>
-  <TextView
-    android:id="@+id/tv2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Rep"
-    android:layout_below="@id/tv1"
-    />
-  <TextView
-    android:id="@+id/tv3"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Rep"
-    android:layout_below="@id/tv2"
-    />
-  <TextView
-    android:id="@+id/tv4"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Rep"
-    android:layout_below="@id/tv3"
-    />
-</RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:weightSum="1">
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="48dp"
+          android:text="Resultat"
+          android:textSize="25sp"
+          android:textStyle="bold"
+          android:textColor="@color/holo_red_dark"
+          android:id="@+id/text_progress" />
+
+
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/grid"
+            android:id="@+id/grid"
+            android:layout_gravity="center"/>
+
+
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+        <Button
+            android:text="retour"
+            android:textColor="@color/holo_red_dark"
+            android:textSize="20sp"
+            android:background="@drawable/border_button"
+            android:layout_width="133dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_back"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"/>
+
+      </RelativeLayout>
+
+    </LinearLayout>
+
+  </FrameLayout>

@@ -2,12 +2,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.app.politcus.game.TestFragment">
+    tools:context="com.app.politcus.game.test_coord.TestFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="20dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Question 1 sur 36"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/holo_red_dark"
+            android:id="@+id/text_progress" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Si les gens veulent conduire sans leur ceinture de sécurité, ce devrait être à eux d'en décider."
+            android:id="@+id/text_question"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:layout_weight="0.10"
+            android:textAlignment="center"
+            android:height="170dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.4">
+
+            <TextView
+                android:text="D'accord"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignBottom="@+id/textView"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:text="Pas d'accord"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:textSize="17sp"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_bar"
+                android:layout_weight="0.18"
+                android:max="4"
+                android:progress="2"
+                android:progressDrawable="@drawable/progressbar_red"
+                android:secondaryProgress="0"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="89dp">
+
+            <Button
+                android:text="Suivant"
+                android:textColor="@color/holo_red_dark"
+                android:textSize="20sp"
+                android:background="@drawable/border_button"
+                android:layout_width="133dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_next"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>
