@@ -5,7 +5,6 @@
     tools:context="com.app.politcus.game.test_coord.TestFragment"
   android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:orientation="vertical"
