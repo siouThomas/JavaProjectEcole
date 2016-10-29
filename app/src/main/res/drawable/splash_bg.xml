@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/logo_politicus_petit"/>
+            android:src="@drawable/logo_app"/>
     </item>
 
 </layer-list>
