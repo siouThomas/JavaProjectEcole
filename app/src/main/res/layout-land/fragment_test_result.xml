@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.politcus.game.test_coord.TestResultFragment"
+  android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Résultat :\nDroitard Communautariste"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/holo_red_dark"
+            android:id="@+id/text_result"
+            android:layout_marginBottom="10dp"/>
+
+  <RelativeLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:weightSum="1"    >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/grid"
+            android:id="@+id/grid"
+          />
+
+
+
+            <Button
+                android:text="retour"
+                android:textColor="@color/holo_red_dark"
+                android:textSize="20sp"
+                android:background="@drawable/border_button"
+                android:layout_width="133dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_back"
+              android:layout_alignParentEnd="true"
+              android:layout_marginTop="100dp"/>
+
+
+    </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>
